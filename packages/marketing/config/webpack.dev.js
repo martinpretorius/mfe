@@ -6,6 +6,7 @@ const { merge } = require("webpack-merge"); // merge is a function to merge toge
 const HtmlWebpackPlugin = require("html-webpack-plugin"); // inject script tags inside a html file
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin.js");
 const commonConfig = require("./webpack.common.js");
+const packageJson = require("../package.json");
 
 const devConfig = {
   mode: "development",
@@ -22,6 +23,7 @@ const devConfig = {
       exposes: {
         "./Marketing": "./src/bootstrap",
       },
+      shared: packageJson,
     }),
     new HtmlWebpackPlugin({
       template: "./public/index.html",
