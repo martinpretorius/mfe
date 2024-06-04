@@ -31,5 +31,3 @@ const devConfig = {
 };
 
 module.exports = merge(commonConfig, devConfig); // by listing devConfig 2nd it will override similar options inside commonConfig
-
-// random comment
