@@ -3,7 +3,6 @@
 // import commonConfig from "./webpack.common.js";
 
 const { merge } = require("webpack-merge"); // merge is a function to merge together 2 webpack config objects
-const HtmlWebpackPlugin = require("html-webpack-plugin"); // inject script tags inside a html file
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin.js");
 const commonConfig = require("./webpack.common.js");
 const packageJson = require("../package.json");
@@ -23,9 +22,6 @@ const devConfig = {
         marketingApp: "marketing@http://localhost:8081/remoteEntry.js",
       },
       shared: packageJson,
-    }),
-    new HtmlWebpackPlugin({
-      template: "./public/index.html",
     }),
   ],
 };
