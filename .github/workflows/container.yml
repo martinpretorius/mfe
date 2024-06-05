@@ -19,7 +19,7 @@ defaults:
 # here the actual work occurs
 jobs:
   build:
-    # we want a linux based virtual machine to run these command in
+    # we want a linux based virtual machine to run these commands in
     runs-on: ubuntu-latest
 
     # the actual commands that we want to execute
