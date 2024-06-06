@@ -5,6 +5,7 @@ export default () => {
   return (
     <div>
       <h1>Hello Micro Front End & React world!!!</h1>
+      <h1>Hello Micro Front End & React world</h1>
       <hr />
       <MarketingApp />
     </div>

@@ -9,6 +9,7 @@ const prodConfig = {
   mode: "production", // this instructs webpack to optimize and minify the js files during build(webpack takes a little longer to load)
   output: {
     filename: "[name].[contenthash].js", // when we build files for prod use this as a template for naming, first the name of the file that was created and then a hash of the content of the file - this is done for caching issues
+    publicPath: '/container/latest/', // html-webpack-plugin will prepend all js files with this path before attaching to html document
   },
   plugins: [
     new ModuleFederationPlugin({
