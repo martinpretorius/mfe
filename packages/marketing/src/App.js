@@ -2,6 +2,7 @@ import React from "react";
 import { Switch, Route, BrowserRouter } from "react-router-dom";
 import {
   StylesProvider,
+  JssProvider,
   createGenerateClassName,
 } from "@material-ui/core/styles";
 import Landing from "./components/Landing.js";
@@ -14,8 +15,8 @@ const generateClassName = createGenerateClassName({
 
 export default () => {
   return (
-    // StylesProvider is a react comp used to customize all the css-in-js generation stuff.
-    <StylesProvider generateClassName={generateClassName}>
+    // StylesProvider is a react comp used to customize all the css-in-js generation stuff
+    <JssProvider generateClassName={generateClassName}>
       <div>
         <BrowserRouter>
           <Switch>
@@ -24,6 +25,6 @@ export default () => {
           </Switch>
         </BrowserRouter>
       </div>
-    </StylesProvider>
+    </JssProvider>
   );
 };

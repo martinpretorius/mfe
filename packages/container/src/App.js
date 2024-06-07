@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter } from "react-router-dom";
 import {
   StylesProvider,
+  JssProvider,
   createGenerateClassName,
 } from "@material-ui/core/styles";
 import MarketingApp from "./components/MarketingApp";
@@ -15,12 +16,13 @@ const generateClassName = createGenerateClassName({
 export default () => {
   return (
     <BrowserRouter>
-      <StylesProvider generateClassName={generateClassName}>
+      {/* StylesProvider is a react comp used to customize all the css-in-js generation stuff */}
+      <JssProvider generateClassName={generateClassName}>
         <div>
           <Header />
           <MarketingApp />
         </div>
-      </StylesProvider>
+      </JssProvider>
     </BrowserRouter>
   );
 };
