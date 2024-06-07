@@ -2,7 +2,6 @@ import React from "react";
 import { Switch, Route, BrowserRouter } from "react-router-dom";
 import {
   StylesProvider,
-  JssProvider,
   createGenerateClassName,
 } from "@material-ui/core/styles";
 import Landing from "./components/Landing.js";
@@ -10,13 +9,13 @@ import Pricing from "./components/Pricing.js";
 
 // generate a unique prefix for all css class names in this project to avoid class name collisions with other projects when ever you use a css-in-js library
 const generateClassName = createGenerateClassName({
-  seed: "ma",
+  productionPrefix: "ma",
 });
 
 export default () => {
   return (
     // StylesProvider is a react comp used to customize all the css-in-js generation stuff
-    <JssProvider generateClassName={generateClassName}>
+    <StylesProvider generateClassName={generateClassName}>
       <div>
         <BrowserRouter>
           <Switch>
@@ -25,6 +24,6 @@ export default () => {
           </Switch>
         </BrowserRouter>
       </div>
-    </JssProvider>
+    </StylesProvider>
   );
 };
