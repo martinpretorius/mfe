@@ -14,14 +14,13 @@ const generateClassName = createGenerateClassName({
 
 export default () => {
   return (
-    <BrowserRouter>
-      {/* StylesProvider is a react comp used to customize all the css-in-js generation stuff  */}
-      <StylesProvider generateClassName={generateClassName}>
+    <StylesProvider generateClassName={generateClassName}>
+      <BrowserRouter>
         <div>
           <Header />
           <MarketingApp />
         </div>
-      </StylesProvider>
-    </BrowserRouter>
+      </BrowserRouter>
+    </StylesProvider>
   );
 };
