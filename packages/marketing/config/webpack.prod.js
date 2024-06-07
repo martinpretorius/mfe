@@ -13,7 +13,7 @@ const prodConfig = {
   plugins: [
     new ModuleFederationPlugin({
       name: "marketing",
-      filename: "remoteEntry1.js", // remoteEntry.js instructs some other program(container) how to load the code for this project, it contains a list of urls to files
+      filename: "remoteEntry.js", // remoteEntry.js instructs some other program(container) how to load the code for this project, it contains a list of urls to files
       exposes: {
         "./Marketing": "./src/bootstrap", // Marketing = name alias that easier to read and make sense of
       },
