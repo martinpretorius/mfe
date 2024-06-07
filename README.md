@@ -1,0 +1,1 @@
+# with http2 it is more advantageous to have multiple small js files than single large js file because they load up faster

@@ -18,7 +18,7 @@ const prodConfig = {
         // where we should go to get some source code
         marketingApp: `marketing@${domain}/marketing/latest/remoteEntry.js`, // this key matches up to some import somewhere inside our container project, domain gets set when we create our infrastructure on amazon s3; whenever we want to find marketing then go to the cloudfront-domain/marketing/latest/remoteEntry.js and that will tell us how to load the code for our marketing app
       },
-      shared: packageJson.dependencies,
+      shared: packageJson.dependencies, // this will create multiple seperate js files so that we load only a single copy of each dependency across the different apps
     }),
   ],
 };

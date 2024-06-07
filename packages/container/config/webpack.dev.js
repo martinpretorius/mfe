@@ -21,7 +21,7 @@ const devConfig = {
       remotes: {
         marketingApp: "marketing@http://localhost:8081/remoteEntry.js",
       },
-      shared: packageJson,
+      shared: packageJson.dependencies,
     }),
   ],
 };
