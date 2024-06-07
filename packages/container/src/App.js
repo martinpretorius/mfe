@@ -9,7 +9,7 @@ import Header from "./components/Header";
 
 // generate a unique prefix for all css class names in this project to avoid class name collisions with other projects when ever you use a css-in-js library
 const generateClassName = createGenerateClassName({
-  productionPrefix: "co",
+  seed: "co",
 });
 
 export default () => {
