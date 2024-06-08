@@ -1,6 +1,9 @@
 import React from "react";
 import { Switch, Route, BrowserRouter } from "react-router-dom";
-import { StylesProvider, createGenerateClassName } from "@mui/styles";
+import {
+  StylesProvider,
+  createGenerateClassName,
+} from "@material-ui/core/styles";
 import Landing from "./components/Landing.js";
 import Pricing from "./components/Pricing.js";
 
@@ -13,7 +16,7 @@ const generateClassName = createGenerateClassName({
 
 export default () => {
   return (
-    // StylesProvider is a react comp used to customize all the css-in-js generation stuff.
+    // StylesProvider is a react comp used to customize all the css-in-js generation stuff
     <StylesProvider generateClassName={generateClassName}>
       <BrowserRouter>
         <Switch>
