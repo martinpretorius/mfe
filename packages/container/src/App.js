@@ -15,12 +15,12 @@ export default () => {
   return (
     /* StylesProvider is a react comp used to customize all the css-in-js generation stuff */
     <StylesProvider generateClassName={generateClassName1}>
-      {/* <BrowserRouter> */}
-      {/* <div> */}
-      <Header />
-      <MarketingApp />
-      {/* </div> */}
-      {/* </BrowserRouter> */}
+      <BrowserRouter>
+        {/* <div> */}
+        <Header />
+        <MarketingApp />
+        {/* </div> */}
+      </BrowserRouter>
     </StylesProvider>
   );
 };
