@@ -1,9 +1,6 @@
 import React from "react";
 import { Switch, Route, BrowserRouter } from "react-router-dom";
-import {
-  StylesProvider,
-  createGenerateClassName,
-} from "@material-ui/core/styles";
+import { StylesProvider, createGenerateClassName } from "@mui/styles";
 import Landing from "./components/Landing.js";
 import Pricing from "./components/Pricing.js";
 

@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
-import { StylesProvider, createGenerateClassName } from "@material-ui/styles";
+import { StylesProvider, createGenerateClassName } from "@mui/styles";
 import MarketingApp from "./components/MarketingApp";
 import Header from "./components/Header";
 
