@@ -17,7 +17,7 @@ const prodConfig = {
       exposes: {
         "./Marketing": "./src/bootstrap", // Marketing = name alias that easier to read and make sense of
       },
-      // shared: packageJson.dependencies,
+      shared: packageJson.dependencies,
     }),
   ],
 };
