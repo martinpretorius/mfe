@@ -13,7 +13,7 @@ const generateClassName1 = createGenerateClassName({
 
 export default () => {
   return (
-    /* StylesProvider is a react comp used to customize all the css-in-js generation stuff */
+    /* StylesProvider is a react comp used to customize all the css-in-js generation stuff. */
     <StylesProvider generateClassName={generateClassName1}>
       <BrowserRouter>
         {/* <div> */}
