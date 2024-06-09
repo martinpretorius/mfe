@@ -3,6 +3,7 @@
 // import commonConfig from "./webpack.common.js";
 
 const { merge } = require("webpack-merge"); // merge is a function to merge together 2 webpack config objects
+const HtmlWebpackPlugin = require("html-webpack-plugin"); // inject script tags inside a html file
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin.js");
 const commonConfig = require("./webpack.common.js");
 const packageJson = require("../package.json");
@@ -10,22 +11,25 @@ const packageJson = require("../package.json");
 const devConfig = {
   mode: "development",
   output: {
-    publicPath: "http://localhost:8080/",
+    publicPath: "http://localhost:8082/", // dont forget the forward-slash at the end
   },
   devServer: {
-    port: 8080,
+    port: 8082,
     historyApiFallback: {
       index: "/index.html",
     },
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: "container",
-      remotes: {
-        marketingApp: "marketing@http://localhost:8081/remoteEntry.js",
-        authApp: "auth@http://localhost:8082/remoteEntry.js",
+      name: "auth",
+      filename: "remoteEntry.js",
+      exposes: {
+        "./Auth": "./src/bootstrap",
       },
       shared: packageJson.dependencies,
+    }),
+    new HtmlWebpackPlugin({
+      template: "./public/index.html",
     }),
   ],
 };

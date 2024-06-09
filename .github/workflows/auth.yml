@@ -1,0 +1,48 @@
+# yml syntax similar to json but yml format is tab based
+name: deploy-auth
+
+# when do we want to execute this workflow and on which branch
+on:
+  push:
+    branches:
+      - personal-laptop
+      - work-laptop
+    # run workflow only when we make a change to the auth project
+    paths:
+      - "packages/auth/**"
+
+# this changes us into the auth folder so we can run commands like npm run build
+defaults:
+  run:
+    working-directory: packages/auth
+
+# here the actual work occurs
+jobs:
+  build:
+    # we want a linux based virtual machine to run these command in
+    runs-on: ubuntu-latest
+
+    # the actual commands that we want to execute
+    steps:
+      # checkout/load the source code into the virtual machine
+      - uses: actions/checkout@v2
+      # install all dependencies inside our project
+      - run: npm install
+      # run webpack process and generate dist directory
+      - run: npm run build
+
+      #  deploy all built files off to amazon s3 using aws cli(programmatic access to amazon web services)
+      - uses: shinyinc/action-aws-cli@v1.2
+      #  then use cli to run a command that sync contents of dist directory with a s3 bucket(place to store files on aws)
+      - run: aws s3 sync dist s3://${{secrets.AWS_AUTH_DIR}}
+        # - run: aws s3 sync dist s3://mfe-bucket-martinsbox/auth/latest/
+        env:
+          AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
+          AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
+          AWS_DEFAULT_REGION: us-east-1
+
+      - run: aws cloudfront create-invalidation --distribution-id ${{secrets.AWS_DISTRIBUTION_ID}} --paths '/auth/latest/remoteEntry.js'
+        env:
+          AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
+          AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
+          AWS_DEFAULT_REGION: us-east-1
