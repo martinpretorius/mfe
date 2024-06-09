@@ -11,20 +11,20 @@ const packageJson = require("../package.json");
 const devConfig = {
   mode: "development",
   output: {
-    publicPath: "http://localhost:8081/",
+    publicPath: "http://localhost:8082/", // dont forget the forward-slash at the end
   },
   devServer: {
-    port: 8081,
+    port: 8082,
     historyApiFallback: {
       index: "/index.html",
     },
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: "marketing",
+      name: "auth",
       filename: "remoteEntry.js",
       exposes: {
-        "./Marketing": "./src/bootstrap",
+        "./Auth": "./src/bootstrap",
       },
       shared: packageJson.dependencies,
     }),

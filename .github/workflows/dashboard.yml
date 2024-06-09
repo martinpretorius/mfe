@@ -1,5 +1,5 @@
 # yml syntax similar to json but yml format is tab based
-name: deploy-container
+name: deploy-dashboard
 
 # when do we want to execute this workflow and on which branch
 on:
@@ -7,14 +7,14 @@ on:
     branches:
       - personal-laptop
       - work-laptop
-    # run workflow only when we make a change to the container project
+    # run workflow only when we make a change to the dashboard project
     paths:
-      - "packages/container/**"
+      - "packages/dashboard/**"
 
-# this changes us into the container folder so we can run commands like npm run build
+# this changes us into the dashboard folder so we can run commands like npm run build
 defaults:
   run:
-    working-directory: packages/container
+    working-directory: packages/dashboard
 
 # here the actual work occurs
 jobs:
@@ -30,20 +30,18 @@ jobs:
       - run: npm install
       # run webpack process and generate dist directory
       - run: npm run build
-        env:
-          PRODUCTION_DOMAIN: ${{ secrets.PRODUCTION_DOMAIN }}
 
       #  deploy all built files off to amazon s3 using aws cli(programmatic access to amazon web services)
       - uses: shinyinc/action-aws-cli@v1.2
       #  then use cli to run a command that sync contents of dist directory with a s3 bucket(place to store files on aws)
-      - run: aws s3 sync dist s3://${{secrets.AWS_CONTAINER_DIR}}
-        # - run: aws s3 sync dist s3://mfe-bucket-martinsbox/container/latest/
+      - run: aws s3 sync dist s3://${{secrets.AWS_DASHBOARD_DIR}}
+        # - run: aws s3 sync dist s3://mfe-bucket-martinsbox/dashboard/latest/
         env:
           AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
           AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
           AWS_DEFAULT_REGION: us-east-1
 
-      - run: aws cloudfront create-invalidation --distribution-id ${{secrets.AWS_DISTRIBUTION_ID}} --paths '/container/latest/index.html'
+      - run: aws cloudfront create-invalidation --distribution-id ${{secrets.AWS_DISTRIBUTION_ID}} --paths '/dashboard/latest/remoteEntry.js'
         env:
           AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
           AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
